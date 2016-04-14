@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH -A TG-AST030031N
+#SBATCH -J gkeyll_test_trunk
+#SBATCH -o gkeyll_test_trunk.log
+#SBATCH -n 256              # total number of mpi tasks requested
+#SBATCH -p development     # queue (partition) -- normal, development, etc.
+#SBATCH -t 2:00:00        # run time (hh:mm:ss) - 1.5 hours
+#SBATCH --mail-user=jjuno@umd.edu
+#SBATCH --mail-type=begin  # email me when the job starts
+#SBATCH --mail-type=end    # email me when the job finishes
+set echo
+#cd $PBS_O_WORKDIR
+
+# run my exgcutable
+echo "Job begin:"`date`
+echo "Run Gkeyll on Stampede"
+ibrun -n 256 -o 0 /work/03539/tg828380/gkeyllall/builds/gkeyll/par/gkeyll/gkeyll -i /scratch/03539/tg828380/weibel/weibel.lua
+echo "Job   end:"`date`
+
+
